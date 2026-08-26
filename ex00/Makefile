@@ -5,6 +5,7 @@ INC_FLAGS = -I$(INC_DIR)
 TARGET = convert
 SRCS = 	main.cpp\
 		ScalarConverter.cpp\
+		type_printers.cpp\
 		
 OBJS = $(SRCS:.cpp=.o)
 
@@ -27,6 +28,9 @@ fclean: clean
 re: fclean all
 
 checkleaks: all
-	valgrind --leak-check=yes ./$(TARGET)
+	valgrind --leak-check=full \
+		--show-leak-kinds=all \
+		--track-origins=yes \
+		--verbose ./$(TARGET)
 
 .PHONY: all clean fclean re

@@ -5,48 +5,54 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rlobun <rlobun@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/08/13 13:01:17 by rlobun            #+#    #+#             */
-/*   Updated: 2026/08/13 16:12:08 by rlobun           ###   ########.fr       */
+/*   Created: 2026/07/29 16:28:49 by rlobun            #+#    #+#             */
+/*   Updated: 2026/08/26 12:08:50 by rlobun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
+#include "type_printers.hpp"
 
-#include <iostream>
-#include <iomanip>
-#include <cstdlib>
-#include <cerrno>
-#include <climits>
-#include <cfloat>
-#include <cmath>
-#include <cctype>
+ScalarConverter::ScalarConverter(void)
+{ }
 
-ScalarConverter::ScalarConverter()
+ScalarConverter::ScalarConverter(ScalarConverter const &src)
 {
-
+    *this = src;
 }
 
-ScalarConverter::ScalarConverter(const ScalarConverter& other)
+ScalarConverter::~ScalarConverter(void)
+{ }
+
+ScalarConverter	&ScalarConverter::operator=(ScalarConverter const &rhs)
 {
-	(void)other;
-	return (this);
+	(void)rhs;
+	return *this;
 }
 
-ScalarConverter& ScalarConverter::operator=(const ScalarConverter& other)
+void    ScalarConverter::convert(const std::string& str)
 {
-	(void)other;
-	return (this);
-}
-
-ScalarConverter::~ScalarConverter()
-{
-
-}
-
-void ScalarConverter::convert(const std::string& literal)
-{
-	std::cout << "char: impossible" << std::endl;
-	std::cout << "int: impossible" << std::endl;
-	std::cout << "float: impossible" << std::endl;
-	std::cout << "double: impossible" << std::endl;
+    size_t  len = str.length();
+    e_inpttp  type = getType(str, len);
+    switch(type)
+    {
+        case INVALID:
+            std::cout << "Invalid input" << std::endl;
+            break;
+        case SPECIAL:
+            printSpecial(str);
+            break;
+        case CHAR:
+            printChar(str, len);
+            break;
+        case INT:
+            printInt(str);
+            break;
+        case FLOAT:
+            printFloat(str);
+            break;
+        case DOUBLE:
+            printDouble(str);
+            break;
+    }
 }

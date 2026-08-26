@@ -1,10 +1,10 @@
 CPP = c++
 CPP_FLAGS = -Wall -Wextra -Werror -std=c++98
-INC_DIR = ./include
+INC_DIR = ./inc
 INC_FLAGS = -I$(INC_DIR)
-TARGET = bureaucrats
+TARGET = ser_deser
 SRCS = 	main.cpp\
-		Bureaucrat.cpp\
+		Serializer.cpp\
 		
 OBJS = $(SRCS:.cpp=.o)
 
@@ -27,6 +27,9 @@ fclean: clean
 re: fclean all
 
 checkleaks: all
-	valgrind --leak-check=yes ./$(TARGET)
+	valgrind --leak-check=full \
+		--show-leak-kinds=all \
+		--track-origins=yes \
+		--verbose ./$(TARGET)
 
 .PHONY: all clean fclean re

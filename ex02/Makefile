@@ -1,10 +1,9 @@
 CPP = c++
 CPP_FLAGS = -Wall -Wextra -Werror -std=c++98
-INC_DIR = ./include
+INC_DIR = ./inc
 INC_FLAGS = -I$(INC_DIR)
-TARGET = bureaucrats
-SRCS = 	main.cpp\
-		Bureaucrat.cpp\
+TARGET = identify
+SRCS = 	main.cpp
 		
 OBJS = $(SRCS:.cpp=.o)
 

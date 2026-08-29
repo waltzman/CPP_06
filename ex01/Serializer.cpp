@@ -6,7 +6,7 @@
 /*   By: rlobun <rlobun@student.42madrid.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/26 12:45:56 by rlobun            #+#    #+#             */
-/*   Updated: 2026/08/26 12:45:57 by rlobun           ###   ########.fr       */
+/*   Updated: 2026/08/26 14:40:29 by rlobun           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ Serializer &Serializer::operator=(const Serializer &src)
 	return *this;
 }
 
-
-uintptr_t	Serializer::serialize(Data *ptr)
+ uintptr_t	Serializer::serialize(Data *ptr)
 {
 	return (reinterpret_cast<uintptr_t>(ptr));
 }
